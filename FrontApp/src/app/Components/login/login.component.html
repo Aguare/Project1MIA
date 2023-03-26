@@ -1,0 +1,53 @@
+<section class="vh-100" style="background-color: #2a2a2a;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+                <div class="card" style="border-radius: 1rem;">
+                    <div class="row g-0">
+                        <div class="col-md-6 col-lg-5 d-none d-md-block">
+                            <img
+                                src="../../../assets/logo-login.png"
+                                alt="login form"
+                                class="img-fluid"
+                                style="border-radius: 1rem 0 0 1rem;"
+                            >
+                        </div>
+                        <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                            <div class="card-body p-4 p-lg-5 text-black">
+                                <form
+                                   [formGroup]="loginForm"
+                                  (ngSubmit)="validate()"
+                                  class="form-validate"
+                                >
+                                    <div class="d-flex align-items-center mb-3 pb-1">
+                                        <img
+                                            src="../../../assets/Icon.png"
+                                            class="rounded-circle"
+                                            alt="Icon"
+                                            width="50"
+                                            height="50"
+                                        >
+                                        <span class="h1 fw-bold mb-0">Bienvenido</span>
+                                    </div>
+                                    <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Ingrese sus datos</h5>
+                                    <div class="form-outline mb-4">
+                                        <input type="text" id="username" formControlName="username" class="form-control form-control-lg" placeholder="Usuario">
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <input type="password" id="password" formControlName="password" class="form-control form-control-lg" placeholder="Contraseña">
+                                    </div>
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-dark btn-lg btn-block">Iniciar</button>
+                                    </div>
+                                    <div *ngIf="error" class="alert alert-danger my-2 d-grid" role="alert">
+                                        Error al iniciar sesión, verifique sus datos
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
