@@ -5,6 +5,8 @@ import { NavSellerComponent } from "./Components/Seller/nav-seller/nav-seller.co
 import { NavInventoryComponent } from "./Components/Inventory/nav-inventory/nav-inventory.component";
 import { NavCellarComponent } from "./Components/Cellar/nav-cellar/nav-cellar.component";
 import { NavAdminComponent } from "./Components/Admin/nav-admin/nav-admin.component";
+import { ClientFormComponent } from "./Components/Seller/client-form/client-form.component";
+import { ListClientsComponent } from "./Components/Seller/list-clients/list-clients.component";
 
 const routes: Routes = [
   {
@@ -19,7 +21,10 @@ const routes: Routes = [
   {
     path: "Seller",
     component: NavSellerComponent,
-    children: [],
+    children: [
+      { path: "Register/:nit", component: ClientFormComponent },
+      { path: "List-Clients", component: ListClientsComponent },
+    ],
   },
   {
     path: "Inventory",

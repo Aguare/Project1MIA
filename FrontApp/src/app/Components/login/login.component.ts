@@ -6,10 +6,12 @@ import {
   ReactiveFormsModule,
   Validators,
 } from "@angular/forms";
+import { Alert } from "src/app/Entitys/Alert";
 import { User } from "src/app/Entitys/User";
 import { ConsultsService } from "src/app/Services/Consults.service";
 import { StorageService } from "src/app/Services/Storage/storage.service";
 import { RedirectService } from "src/app/Services/redirect.service";
+import { AlertComponent } from "../alert/alert.component";
 
 @Component({
   selector: "app-login",
@@ -17,7 +19,7 @@ import { RedirectService } from "src/app/Services/redirect.service";
   styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent {
-  error: boolean = false;
+  alert: Alert = new Alert("", "", "", false);
   loginForm: FormGroup;
   user: User = new User("", "", "", "");
 
@@ -37,15 +39,31 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.user.username = this.loginForm.value.username;
       this.user.password = this.loginForm.value.password;
-      this.verify.validateUser(this.user).subscribe((correct: User) => {
-        if (correct.role != "error") {
-          this.storage.add(correct, "User");
-          this.redirect.redirectLogin();
-        } else {
-          this.error = true;
+      this.verify.validateUser(this.user).subscribe(
+        (correct: User) => {
+          if (correct.role != "error") {
+            this.storage.add(correct, "User");
+            this.redirect.redirectLogin();
+          } else {
+            this.alert = new Alert(
+              "Usuario o contraseña incorrectos",
+              "Error",
+              "danger",
+              true
+            );
+            this.loginForm.reset();
+          }
+        },
+        (error) => {
+          this.alert = new Alert(
+            "No hay conexión con el servidor",
+            "Error",
+            "warning",
+            true
+          );
           this.loginForm.reset();
         }
-      });
+      );
     }
   }
 }

@@ -1,0 +1,43 @@
+<div class="container-sm p-5" style="max-width: 700px">
+  <form [formGroup]="clientForm" (ngSubmit)="validate()" class="was-validated">
+    <div class="mb-3 mt-3">
+      <label for="uname" class="form-label">NIT</label>
+      <input
+        type="text"
+        class="form-control"
+        maxlength="20"
+        formControlName="nit"
+        placeholder="Ingrese el NIT"
+        required
+      />
+    </div>
+    <div class="mb-3 mt-3">
+      <label for="uname" class="form-label">Nombre</label>
+      <input
+        type="text"
+        class="form-control"
+        id="names"
+        maxlength="50"
+        formControlName="names"
+        placeholder="Ingrese el nombre completo"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="pwd" class="form-label">Dirección</label>
+      <input
+        type="text"
+        class="form-control"
+        id="address"
+        maxlength="50"
+        formControlName="address"
+        placeholder="Ingrese la dirección"
+        required
+      />
+    </div>
+    <div class="d-grid">
+      <button type="submit" class="btn btn-primary">Registrar</button>
+    </div>
+  </form>
+  <app-alert [alert]="alert"></app-alert>
+</div>

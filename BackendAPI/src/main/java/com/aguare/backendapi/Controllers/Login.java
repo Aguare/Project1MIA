@@ -6,7 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -18,13 +17,12 @@ public class Login {
     private UserDAO user;
 
     @PostMapping("/Login")
-    public User getProducts(@RequestBody User in){
+    public User getUser(@RequestBody User in){
         Optional<User> receipt = this.user.findById(in.getUsername());
         User er = new User();
         er.setRole("error");
         if(receipt.isPresent()){
             if(receipt.get().getPassword().equals(in.getPassword())){
-                log.info("User: " + receipt.get().getUsername() + " logged in "+ receipt.get().getRole() + " pass "+receipt.get().getPassword());
                 return receipt.get();
             }
         }

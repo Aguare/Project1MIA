@@ -13,8 +13,8 @@ import java.io.Serializable;
 public class Client implements Serializable {
 
     @Id
-    private String NIT;
+    private String nit;
 
-    private String nameC;
-    private String addres;
+    private String names_c;
+    private String address;
 }
