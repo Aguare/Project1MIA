@@ -1,0 +1,68 @@
+<div class="container p-5" style="max-width: 95%">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="text-center">Listado de Productos</h1>
+    </div>
+    <div class="input-group mb-3" *ngIf="this.user.fk_dpi.branch.idBranch == 4">
+      <label class="input-group-text" for="inputGroupSelect01">Sucursal</label>
+      <select
+        [(ngModel)]="idBranch"
+        class="form-select"
+        (change)="chargeProducts()"
+      >
+        <option value="1">Central</option>
+        <option value="2">Norte</option>
+        <option value="3">Sur</option>
+        <option value="4">Bodega</option>
+        <option value="5">Todas</option>
+      </select>
+    </div>
+    <table class="table">
+      <thead class="table-dark">
+        <tr class="text-center">
+          <th scope="col">ID</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Descripción</th>
+          <th scope="col">Cantidad</th>
+          <th *ngIf="idBranch == 5" scope="col">Sucursal</th>
+          <th scope="col">Opciones</th>
+        </tr>
+      </thead>
+      <tbody class="text-center">
+        <tr *ngIf="products?.length == 0">
+          <td colspan="5">No hay productos registrados</td>
+        </tr>
+        <tr *ngFor="let product of products">
+          <td>{{ product.product.idProduct }}</td>
+          <td>{{ product.product.name_p }}</td>
+          <td>
+            {{ product.product.price | currency : "Q" : "symbol" : "1.2-2" }}
+          </td>
+          <td>{{ product.product.description }}</td>
+          <td>{{ product.quantity }}</td>
+          <th *ngIf="idBranch == 5" scope="col">{{ product.branch.nameB }}</th>
+          <td>
+            <a
+              class="btn btn-outline-info"
+              href="/Inventory/RegisterProduct/{{ product.product.idProduct }}"
+            >
+              Editar
+            </a>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot class="table-dark">
+        <tr class="text-center">
+          <th scope="col">ID</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Descripción</th>
+          <th scope="col">Cantidad</th>
+          <th *ngIf="idBranch == 5" scope="col">Sucursal</th>
+          <th scope="col">Opciones</th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

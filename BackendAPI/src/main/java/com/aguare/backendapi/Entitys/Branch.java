@@ -11,9 +11,11 @@ import java.io.Serializable;
 public class Branch implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_branch")
     private Long idBranch;
+
+    @Column(name = "name_b")
     private String nameB;
-    private String addres;
+    private String address;
     private String phone;
 }

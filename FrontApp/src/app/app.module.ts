@@ -16,6 +16,12 @@ import { LogoutComponent } from "./Components/logout/logout.component";
 import { AlertComponent } from "./Components/alert/alert.component";
 import { ClientFormComponent } from "./Components/Seller/client-form/client-form.component";
 import { ListClientsComponent } from "./Components/Seller/list-clients/list-clients.component";
+import { ProductFormComponent } from './Components/Inventory/product-form/product-form.component';
+import { ListProductsComponent } from './Components/Inventory/list-products/list-products.component';
+import { ListEmployeesComponent } from './Components/Admin/list-employees/list-employees.component';
+import { EmployeeFormComponent } from './Components/Admin/employee-form/employee-form.component';
+import { SaleComponent } from './Components/Seller/sale/sale.component';
+import { ProductCardComponent } from './Components/Seller/product-card/product-card.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +35,12 @@ import { ListClientsComponent } from "./Components/Seller/list-clients/list-clie
     AlertComponent,
     ClientFormComponent,
     ListClientsComponent,
+    ProductFormComponent,
+    ListProductsComponent,
+    ListEmployeesComponent,
+    EmployeeFormComponent,
+    SaleComponent,
+    ProductCardComponent,
   ],
   imports: [
     BrowserModule,

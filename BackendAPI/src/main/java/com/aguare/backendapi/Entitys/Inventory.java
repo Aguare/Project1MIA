@@ -1,9 +1,6 @@
 package com.aguare.backendapi.Entitys;
 
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -12,7 +9,15 @@ import java.io.Serializable;
 @Entity
 @Table(name = "inventory")
 public class Inventory implements Serializable {
+
     @EmbeddedId
-    private IdInventory idS;
+    private IdInventory idInventory;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "Fk_id_Product", insertable = false, updatable = false)
+    private Product product;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "Fk_id_Branch", insertable = false, updatable = false)
+    private Branch branch;
     private int quantity;
 }

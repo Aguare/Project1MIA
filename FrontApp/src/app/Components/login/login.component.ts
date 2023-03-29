@@ -12,6 +12,8 @@ import { ConsultsService } from "src/app/Services/Consults.service";
 import { StorageService } from "src/app/Services/Storage/storage.service";
 import { RedirectService } from "src/app/Services/redirect.service";
 import { AlertComponent } from "../alert/alert.component";
+import { Employee } from "src/app/Entitys/Employee";
+import { Branch } from "src/app/Entitys/Branch";
 
 @Component({
   selector: "app-login",
@@ -21,7 +23,13 @@ import { AlertComponent } from "../alert/alert.component";
 export class LoginComponent {
   alert: Alert = new Alert("", "", "", false);
   loginForm: FormGroup;
-  user: User = new User("", "", "", "");
+  user: User = new User(
+    "",
+    "",
+    "",
+    "",
+    new Employee(0, "", "", new Date(), new Branch(0, "", "", ""))
+  );
 
   constructor(
     private fb: FormBuilder,

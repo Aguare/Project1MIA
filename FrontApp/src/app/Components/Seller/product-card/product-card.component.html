@@ -1,0 +1,13 @@
+<tr>
+  <td class="col">{{ inv?.product?.idProduct }}</td>
+  <td class="col">{{ inv?.product?.name_p }}</td>
+  <td class="col">{{ inv?.product?.price }}</td>
+  <td>
+    <div class="input-group input-group-sm">
+      <input type="number" min="1" value="1" max="{{ inv?.quantity }}" />
+    </div>
+  </td>
+  <td>
+    <button class="btn btn-outline-danger btn-sm">Quitar</button>
+  </td>
+</tr>

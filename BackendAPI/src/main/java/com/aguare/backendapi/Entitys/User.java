@@ -1,8 +1,6 @@
 package com.aguare.backendapi.Entitys;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -16,4 +14,8 @@ public class User implements Serializable {
     private String password;
     private String email;
     private String role;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "Fk_DPI", insertable = false, updatable = false)
+    private Employee fk_dpi;
 }

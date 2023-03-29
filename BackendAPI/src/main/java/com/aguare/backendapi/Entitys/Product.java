@@ -2,7 +2,6 @@ package com.aguare.backendapi.Entitys;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.io.Serializable;
 
 @Entity
@@ -15,4 +14,5 @@ public class Product implements Serializable {
     private String name_p;
     private Double price;
     private String description;
+
 }

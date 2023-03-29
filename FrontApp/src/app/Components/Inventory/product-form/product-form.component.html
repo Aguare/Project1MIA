@@ -1,0 +1,43 @@
+<div class="container-sm p-5" style="max-width: 700px">
+  <form [formGroup]="productForm" (ngSubmit)="validate()" class="was-validated">
+    <div class="mb-3 mt-3">
+      <label for="uname" class="form-label">Nombre</label>
+      <input
+        type="text"
+        class="form-control"
+        maxlength="50"
+        formControlName="name_p"
+        placeholder="Ingrese el nombre completo"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="pwd" class="form-label">Precio</label>
+      <input
+        type="number"
+        class="form-control"
+        min="1"
+        step="0.01"
+        max="99999"
+        formControlName="price"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <div class="form-floating">
+        <textarea
+          type="text"
+          class="form-control"
+          maxlength="150"
+          formControlName="description"
+          required
+        ></textarea>
+        <label for="floatingTextarea2">Descripción</label>
+      </div>
+    </div>
+    <div class="d-grid">
+      <button type="submit" class="btn btn-primary">Ingresar</button>
+    </div>
+  </form>
+  <app-alert [alert]="alert"></app-alert>
+</div>
