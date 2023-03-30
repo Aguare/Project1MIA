@@ -122,3 +122,8 @@ testem.log
 .DS_Store  
 Thumbs.db  
 .mvn
+FrontApp/.angular/
+
+FrontApp/node_modules/
+
+.vscode/
