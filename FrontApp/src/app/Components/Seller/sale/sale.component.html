@@ -28,7 +28,7 @@
       <tr *ngFor="let inv of inventory">
         <td>{{ inv.product.idProduct }}</td>
         <td>{{ inv.product.name_p }}</td>
-        <td>{{ inv.product.price }}</td>
+        <td>{{ inv.product.price | currency : "Q" : "symbol" : "1.2-2" }}</td>
         <td>{{ inv.quantity }}</td>
         <td>
           <button class="btn btn-outline-info btn-sm" (click)="addItem(inv)">
@@ -38,10 +38,10 @@
       </tr>
     </tbody>
   </table>
-  <div class="text-center my-5">
+  <br />
+  <div class="text-center my-4">
     <h2>Productos Agregados a la compra</h2>
   </div>
-
   <ul *ngIf="inventory == null && search != ''" class="list-group">
     <li class="list-group-item active">No hay productos</li>
   </ul>

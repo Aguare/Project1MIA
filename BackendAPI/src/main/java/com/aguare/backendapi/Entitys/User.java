@@ -12,7 +12,6 @@ public class User implements Serializable {
     @Id
     private String username;
     private String password;
-    private String email;
     private String role;
 
     @ManyToOne(fetch = FetchType.EAGER)

@@ -12,6 +12,7 @@ public class Inventory implements Serializable {
 
     @EmbeddedId
     private IdInventory idInventory;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "Fk_id_Product", insertable = false, updatable = false)
     private Product product;

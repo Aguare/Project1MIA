@@ -2,8 +2,8 @@ CREATE DATABASE Electronic_Homes;
 
 \c Electronic_Homes;
 
---CREATE SCHEMA InventoryControl;
---CREATE SCHEMA UserAccess;
+CREATE SCHEMA InventoryControl;
+CREATE SCHEMA UserAccess;
 
 CREATE TABLE UserAccess.User_Acces(
     username VARCHAR(50) PRIMARY KEY,

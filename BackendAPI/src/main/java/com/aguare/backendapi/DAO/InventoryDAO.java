@@ -14,4 +14,6 @@ public interface InventoryDAO extends CrudRepository<Inventory, Long> {
 
     @Query("SELECT i FROM Inventory i WHERE i.branch.idBranch = :idB AND i.product.name_p ILIKE :prod% ORDER BY i.product.name_p ASC LIMIT 5")
     Iterable<Inventory> search(@Param("idB") Long idBranch, @Param("prod") String product);
+
+    Inventory findByIdInventory_IdBranchAndIdInventory_IdProduct(Long idBranch, Long idProduct);
 }

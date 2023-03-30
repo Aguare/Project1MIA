@@ -5,18 +5,19 @@ INSERT INTO Branch (id_branch, name_b, address, phone) VALUES
 (4, 'Bodega', 'Calle Secundaria #4', '+1 456-789-0123');
 
 INSERT INTO Employee (DPI, names_e, last_names, date_of_birth, FK_id_branch) VALUES
-(1111111111111, 'Empleado1', 'Apellido1', '1990-01-01', 1),
-(2222222222222, 'Empleado2', 'Apellido2', '1991-02-02', 2),
-(3333333333333, 'Empleado3', 'Apellido3', '1992-03-03', 1),
-(4444444444444, 'Empleado4', 'Apellido4', '1993-04-04', 3),
+(1111111111111, 'Vendedor', 'Apellido1', '1990-01-01', 1),
+(2222222222222, 'Inventario', 'Apellido2', '1991-02-02', 2),
+(3333333333333, 'Bodega', 'Apellido3', '1992-03-03', 4),
+(4444444444444, 'Administrador', 'Apellido4', '1993-04-04', 3),
 (5555555555555, 'Empleado5', 'Apellido5', '1994-05-05', 2);
 
-INSERT INTO User_Acces (username, password, email, role, FK_DPI)
+INSERT INTO User_Acces (username, password, role, FK_DPI)
 VALUES
-    ('vendedor01', '123456', 'vendedor01@empresa.com', 'Vendedor', '1111111111111'),
-    ('inventario01', '123456', 'inventario01@empresa.com', 'Inventario', '2222222222222'),
-    ('bodega01', '123456', 'bodega01@empresa.com', 'Bodega', '3333333333333'),
-    ('admin01', '123456', 'admin01@empresa.com', 'Admin', '4444444444444');
+    ('1111111111111', '123456', 'Vendedor', '1111111111111'),
+    ('2222222222222', '123456', 'Inventario', '2222222222222'),
+    ('3333333333333', '123456', 'Bodega', '3333333333333'),
+    ('4444444444444', '123456', 'Admin', '4444444444444'),
+    ('5555555555555', '123456', 'Vendedor', '5555555555555');
 
 INSERT INTO Client (NIT, names_c, address) VALUES
 ('256198473', 'Cliente1', 'Calle Principal #1'),
@@ -89,6 +90,14 @@ INSERT INTO Inventory (FK_id_Product, FK_id_Branch, quantity) VALUES
 (6,2,2),
 (7,2,40);
 
+INSERT INTO Inventory (FK_id_Product, FK_id_Branch, quantity) VALUES
+(1,4,1),
+(2,4,2),
+(3,4,3),
+(4,4,4),
+(5,4,5),
+(6,4,6),
+(7,4,7);
 ---Consultas---
-SELECT p.id_product, p.name_p, p.price, i.quantity FROM Product p INNER JOIN Inventory i ON p.id_product = i.FK_id_Product WHERE i.FK_id_Branch = 1;
+SELECT p.id_product, p.name_p, p.price, i.quantity FROM Product p INNER JOIN Inventory i ON p.id_product = i.FK_id_Product WHERE i.FK_id_Branch = 2;
 

@@ -15,19 +15,25 @@ export class ListProductsComponent {
   products: Inventory[] | null = null;
   alert: Alert = new Alert("", "", "", false);
   idBranch: number = 1;
-  user: User;
+  user: User = this.storage.getUser();
+  path: string = "/Inventory";
 
   constructor(
     private service: ConsultsService,
     private storage: StorageService
   ) {
-    this.user = this.storage.getUser();
     this.service
       .getEmployeeUserName(this.user.username)
       .subscribe((correct) => {
         this.user.fk_dpi = correct;
       });
     this.idBranch = this.user.fk_dpi.branch.idBranch;
+    if (this.idBranch == 4) {
+      this.path = "/Cellar";
+    }
+  }
+
+  ngOnInit() {
     this.chargeProducts();
   }
 

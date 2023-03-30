@@ -8,6 +8,7 @@ import { Alert } from "../Entitys/Alert";
 import { Product } from "../Entitys/Product";
 import { Inventory } from "../Entitys/Inventory";
 import { Employee } from "../Entitys/Employee";
+import { MoveProduct } from "../Entitys/MoveProduct";
 
 @Injectable({
   providedIn: "root",
@@ -17,6 +18,20 @@ export class ConsultsService {
 
   validateUser(user: User): Observable<User> {
     return this.connection.post<User>(Back.Base + "Login", user);
+  }
+
+  getUser(userName: String): Observable<User> {
+    return this.connection.get<User>(
+      Back.Base + "GetUser?username=" + userName
+    );
+  }
+
+  addUser(user: User): Observable<Alert> {
+    return this.connection.post<Alert>(Back.Base + "AddUser", user);
+  }
+
+  updateUser(user: User): Observable<Alert> {
+    return this.connection.put<Alert>(Back.Base + "UpdateUser", user);
   }
 
   addClient(client: Client): Observable<Alert> {
@@ -83,6 +98,19 @@ export class ConsultsService {
     return this.connection.put<Alert>(Back.Base + "UpdateEmployee", employee);
   }
 
+  getInventoryByIdBranchAndIdProduct(
+    idBranch: number,
+    idProduct: number
+  ): Observable<Inventory> {
+    return this.connection.get<Inventory>(
+      Back.Base +
+        "GetProductByBranchAndProductId?idBranch=" +
+        idBranch +
+        "&idProduct=" +
+        idProduct
+    );
+  }
+
   searchProductByBranchAndProductName(
     idBranch: number,
     productName: String
@@ -94,5 +122,17 @@ export class ConsultsService {
         "&product=" +
         productName
     );
+  }
+
+  moveProducts(move: MoveProduct): Observable<Alert> {
+    return this.connection.put<Alert>(Back.Base + "MoveProducts", move);
+  }
+
+  addInventory(inventory: Inventory): Observable<Alert> {
+    return this.connection.post<Alert>(Back.Base + "AddInventory", inventory);
+  }
+
+  updateInventory(inventory: Inventory): Observable<Alert> {
+    return this.connection.put<Alert>(Back.Base + "UpdateInventory", inventory);
   }
 }

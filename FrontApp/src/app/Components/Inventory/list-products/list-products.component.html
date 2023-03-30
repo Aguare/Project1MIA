@@ -3,7 +3,7 @@
     <div class="col-12">
       <h1 class="text-center">Listado de Productos</h1>
     </div>
-    <div class="input-group mb-3" *ngIf="this.user.fk_dpi.branch.idBranch == 4">
+    <div class="input-group mb-3" *ngIf="this.user.role != 'Bodega'">
       <label class="input-group-text" for="inputGroupSelect01">Sucursal</label>
       <select
         [(ngModel)]="idBranch"
@@ -25,8 +25,26 @@
           <th scope="col">Precio</th>
           <th scope="col">Descripción</th>
           <th scope="col">Cantidad</th>
+          <th
+            *ngIf="
+              this.user.role == 'Inventario' &&
+              this.user.fk_dpi.branch.idBranch == this.idBranch
+            "
+            scope="col"
+          >
+            Opciones
+          </th>
           <th *ngIf="idBranch == 5" scope="col">Sucursal</th>
-          <th scope="col">Opciones</th>
+          <th
+            *ngIf="
+              this.user.role == 'Bodega' ||
+              (this.user.fk_dpi.branch.idBranch != this.idBranch &&
+                this.idBranch != 5)
+            "
+            scope="col"
+          >
+            Opciones
+          </th>
         </tr>
       </thead>
       <tbody class="text-center">
@@ -42,12 +60,44 @@
           <td>{{ product.product.description }}</td>
           <td>{{ product.quantity }}</td>
           <th *ngIf="idBranch == 5" scope="col">{{ product.branch.nameB }}</th>
-          <td>
+          <td *ngIf="this.user.role == 'Bodega'">
             <a
               class="btn btn-outline-info"
-              href="/Inventory/RegisterProduct/{{ product.product.idProduct }}"
+              href="{{ this.path }}/RegisterProduct/{{
+                product.product.idProduct
+              }}"
             >
               Editar
+            </a>
+          </td>
+          <td
+            *ngIf="
+              this.user.role == 'Inventario' &&
+              this.user.fk_dpi.branch.idBranch == this.idBranch
+            "
+          >
+            <a
+              class="btn btn-outline-info"
+              href="/Inventory/IncrementProduct/{{
+                product.product.idProduct
+              }}/{{ this.idBranch }}"
+            >
+              Ingresar
+            </a>
+          </td>
+          <td
+            *ngIf="
+              this.user.fk_dpi.branch.idBranch != this.idBranch &&
+              this.idBranch != 5
+            "
+          >
+            <a
+              class="btn btn-outline-info"
+              href="/Inventory/Move-Product/{{ product.product.idProduct }}/{{
+                this.idBranch
+              }}/{{ this.user.fk_dpi.branch.idBranch }}"
+            >
+              Mover
             </a>
           </td>
         </tr>
@@ -60,7 +110,25 @@
           <th scope="col">Descripción</th>
           <th scope="col">Cantidad</th>
           <th *ngIf="idBranch == 5" scope="col">Sucursal</th>
-          <th scope="col">Opciones</th>
+          <th
+            *ngIf="
+              this.user.role == 'Inventario' &&
+              this.user.fk_dpi.branch.idBranch == this.idBranch
+            "
+            scope="col"
+          >
+            Opciones
+          </th>
+          <th
+            *ngIf="
+              this.user.role == 'Bodega' ||
+              (this.user.fk_dpi.branch.idBranch != this.idBranch &&
+                this.idBranch != 5)
+            "
+            scope="col"
+          >
+            Opciones
+          </th>
         </tr>
       </tfoot>
     </table>

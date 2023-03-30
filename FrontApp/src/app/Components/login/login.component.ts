@@ -27,7 +27,6 @@ export class LoginComponent {
     "",
     "",
     "",
-    "",
     new Employee(0, "", "", new Date(), new Branch(0, "", "", ""))
   );
 

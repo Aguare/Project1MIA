@@ -22,6 +22,9 @@ import { ListEmployeesComponent } from './Components/Admin/list-employees/list-e
 import { EmployeeFormComponent } from './Components/Admin/employee-form/employee-form.component';
 import { SaleComponent } from './Components/Seller/sale/sale.component';
 import { ProductCardComponent } from './Components/Seller/product-card/product-card.component';
+import { ListReportsComponent } from './Components/Admin/list-reports/list-reports.component';
+import { MoveProductComponent } from './Components/Inventory/move-product/move-product.component';
+import { IncrementProductComponent } from './Components/Inventory/increment-product/increment-product.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +44,9 @@ import { ProductCardComponent } from './Components/Seller/product-card/product-c
     EmployeeFormComponent,
     SaleComponent,
     ProductCardComponent,
+    ListReportsComponent,
+    MoveProductComponent,
+    IncrementProductComponent,
   ],
   imports: [
     BrowserModule,

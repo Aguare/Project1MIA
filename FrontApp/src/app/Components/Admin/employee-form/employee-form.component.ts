@@ -4,6 +4,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Alert } from "src/app/Entitys/Alert";
 import { Branch } from "src/app/Entitys/Branch";
 import { Employee } from "src/app/Entitys/Employee";
+import { User } from "src/app/Entitys/User";
 import { ConsultsService } from "src/app/Services/Consults.service";
 
 @Component({
@@ -13,6 +14,12 @@ import { ConsultsService } from "src/app/Services/Consults.service";
 })
 export class EmployeeFormComponent {
   alert: Alert = new Alert("", "", "", false);
+  info: Alert = new Alert(
+    "El usuario podrá acceder al sistema con su DPI y contraseña",
+    "Información:",
+    "info",
+    true
+  );
   employeForm: FormGroup = new FormGroup({});
   today = new Date();
   employee: Employee = new Employee(
@@ -23,6 +30,7 @@ export class EmployeeFormComponent {
     new Branch(1, "", "", "")
   );
   isUpdate: boolean = false;
+  user: User = new User("", "", "", this.employee);
 
   constructor(
     private fb: FormBuilder,
@@ -33,18 +41,22 @@ export class EmployeeFormComponent {
     let tmp = this.route.snapshot.paramMap.get("dpi");
     if (tmp != null && tmp != "new") {
       this.employee.dpi = parseInt(tmp);
-      this.service.getEmployeeDPI(this.employee.dpi).subscribe(
+      this.service.getUser(this.employee.dpi + "").subscribe(
         (correct) => {
           this.isUpdate = true;
-          this.employee = correct;
-          this.employeForm.get("dpi")?.disable();
+          this.user = correct;
+          this.employee = correct.fk_dpi;
           this.employeForm.setValue({
             dpi: this.employee.dpi,
             names_e: this.employee.names,
             last_names: this.employee.lastNames,
             dateBirthday: this.employee.dateBirthday,
             idBranch: this.employee.branch.idBranch,
+            role: this.user.role,
+            password: this.user.password,
           });
+          console.log(correct);
+          this.employeForm.get("dpi")?.disable();
         },
         (error) => {
           this.alert = new Alert(
@@ -60,6 +72,16 @@ export class EmployeeFormComponent {
 
   changeBranch(event: any) {
     this.employee.branch.idBranch = event.target.value;
+  }
+
+  changeRole(event: any) {
+    let val = event.target.value;
+    if (val == "Bodega") {
+      this.user.role = val;
+      this.employee.branch.idBranch = 4;
+    } else {
+      this.user.role = val;
+    }
   }
 
   generateForm() {
@@ -86,6 +108,15 @@ export class EmployeeFormComponent {
         1,
         [Validators.required, Validators.min(1), Validators.max(4)],
       ],
+      role: ["Vendedor", [Validators.required]],
+      password: [
+        "",
+        [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(250),
+        ],
+      ],
     });
   }
 
@@ -95,8 +126,12 @@ export class EmployeeFormComponent {
       this.employee.lastNames = this.employeForm.value.last_names;
       this.employee.dateBirthday = this.employeForm.value.dateBirthday;
       this.employee.branch.idBranch = this.employeForm.value.idBranch;
+      this.user.password = this.employeForm.value.password;
+      this.user.role = this.employeForm.value.role;
+      this.user.fk_dpi = this.employee;
+      this.user.username = this.user.fk_dpi.dpi + "";
       if (this.isUpdate) {
-        this.service.updateEmployee(this.employee).subscribe(
+        this.service.updateUser(this.user).subscribe(
           (correct) => {
             this.alert = correct;
             this.employeForm.reset();
@@ -109,8 +144,9 @@ export class EmployeeFormComponent {
           }
         );
       } else {
+        this.user.username = "" + this.employeForm.value.dpi;
         this.employee.dpi = this.employeForm.value.dpi;
-        this.service.addEmployee(this.employee).subscribe(
+        this.service.addUser(this.user).subscribe(
           (correct) => {
             this.alert = correct;
             this.employeForm.reset();

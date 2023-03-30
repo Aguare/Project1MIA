@@ -1,6 +1,6 @@
---CREATE DATABASE Electronic_Homes;
+CREATE DATABASE Electronic_Homes;
 
---\c electronic_homes;
+\c electronic_homes;
 
 CREATE TABLE Branch(
     id_branch SERIAL PRIMARY KEY,
@@ -10,7 +10,7 @@ CREATE TABLE Branch(
 );
 
 CREATE TABLE Employee(
-    DPI INTEGER(13) PRIMARY KEY,
+    DPI BIGINT PRIMARY KEY,
     names_e VARCHAR(50) NOT NULL,
     last_names VARCHAR(50) NOT NULL,
     date_of_birth DATE NOT NULL,
@@ -20,7 +20,6 @@ CREATE TABLE Employee(
 CREATE TABLE User_Acces(
     username VARCHAR(50) PRIMARY KEY,
     password VARCHAR(250) NOT NULL,
-    email VARCHAR(50) NOT NULL,
     role VARCHAR(50) NOT NULL,
     FK_DPI BIGINT REFERENCES Employee(DPI)
 );

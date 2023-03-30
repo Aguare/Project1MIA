@@ -12,4 +12,12 @@ public class IdInventory implements Serializable {
 
     @Column(name = "Fk_id_Branch")
     private Long idBranch;
+
+    public IdInventory(Long idProduct, Long idBranch) {
+        this.idProduct = idProduct;
+        this.idBranch = idBranch;
+    }
+
+    public IdInventory() {
+    }
 }

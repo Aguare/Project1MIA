@@ -12,6 +12,9 @@ import { ListProductsComponent } from "./Components/Inventory/list-products/list
 import { ListEmployeesComponent } from "./Components/Admin/list-employees/list-employees.component";
 import { EmployeeFormComponent } from "./Components/Admin/employee-form/employee-form.component";
 import { SaleComponent } from "./Components/Seller/sale/sale.component";
+import { ListReportsComponent } from "./Components/Admin/list-reports/list-reports.component";
+import { MoveProductComponent } from "./Components/Inventory/move-product/move-product.component";
+import { IncrementProductComponent } from "./Components/Inventory/increment-product/increment-product.component";
 
 const routes: Routes = [
   {
@@ -38,13 +41,24 @@ const routes: Routes = [
     children: [
       { path: "RegisterProduct/:idProduct", component: ProductFormComponent },
       { path: "List-Products", component: ListProductsComponent },
+      {
+        path: "Move-Product/:idProduct/:idBranch/:idBDestination",
+        component: MoveProductComponent,
+      },
+      {
+        path: "IncrementProduct/:idProduct/:idBranch",
+        component: IncrementProductComponent,
+      },
     ],
   },
   {
     path: "Cellar",
     component: NavCellarComponent,
     children: [
-      { path: "RegisterProduct/:idProduct", component: ProductFormComponent },
+      {
+        path: "RegisterProduct/:idProduct",
+        component: ProductFormComponent,
+      },
       { path: "List-Products", component: ListProductsComponent },
     ],
   },
@@ -54,6 +68,7 @@ const routes: Routes = [
     children: [
       { path: "List-Employees", component: ListEmployeesComponent },
       { path: "Register-Employee/:dpi", component: EmployeeFormComponent },
+      { path: "List-Reports", component: ListReportsComponent },
     ],
   },
 ];

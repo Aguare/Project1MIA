@@ -9,4 +9,7 @@ import java.util.List;
 
 public interface ProductDAO extends CrudRepository<Product, Long> {
 
+    @Query(value = "SELECT p.id_product FROM product p WHERE p.id_product = (SELECT MAX(p2.id_product) FROM product p2)", nativeQuery = true)
+    Long queryTopByIdProduct();
+
 }
