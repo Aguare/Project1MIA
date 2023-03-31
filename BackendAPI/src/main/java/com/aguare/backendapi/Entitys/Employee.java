@@ -11,7 +11,7 @@ import java.sql.Date;
 @Table(name = "employee")
 public class Employee implements Serializable {
     @Id
-    private Long DPI;
+    private Long dpi;
     @Column(name = "names_e")
     private String names;
     @Column(name = "last_names")

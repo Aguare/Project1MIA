@@ -7,6 +7,7 @@ import com.aguare.backendapi.DAO.ListProductsDAO;
 import com.aguare.backendapi.DAO.SaleDAO;
 import com.aguare.backendapi.Entitys.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,10 +15,14 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:4200")
 public class SaleCTRL {
 
+    @Autowired
     private SaleDAO sale;
+    @Autowired
     private ListProductsDAO listProducts;
+    @Autowired
     private InventoryDAO inventory;
 
+    @Autowired
     private ClientDAO client;
 
     @GetMapping("/GetLastSaleByNit")
@@ -29,7 +34,7 @@ public class SaleCTRL {
     public Alert addSale(@RequestBody SaleGroup in2){
         Alert alert = new Alert("Error al realizar la venta", "Error", "danger", true);
         try{
-            boolean client = this.client.existsById(in2.getSale().getDpi());
+            boolean client = this.client.existsById(in2.getSale().getNit());
             sale.save(in2.getSale());
             Long idSale = sale.getIdLastSale();
             Long idBranch = in2.getSale().getIdBranch();

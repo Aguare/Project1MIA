@@ -48,7 +48,7 @@ public class EmployeeCTRL {
 
     @PutMapping("/UpdateEmployee")
     public Alert updateEmployee(@RequestBody Employee in){
-        Optional<Employee> receipt = this.employee.findById(in.getDPI());
+        Optional<Employee> receipt = this.employee.findById(in.getDpi());
         if(receipt.isPresent()){
             this.employee.save(in);
             return new Alert("Empleado actualizado correctamente","Exito!", "success", true);

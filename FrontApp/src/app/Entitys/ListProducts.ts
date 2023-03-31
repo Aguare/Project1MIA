@@ -5,7 +5,7 @@ export class ListProducts {
   idSale: number;
   idProduct: Product;
   quantity: number;
-  subTotal: number;
+  subtotal: number;
   idBranch: number;
 
   constructor(
@@ -20,7 +20,7 @@ export class ListProducts {
     this.idSale = idSale;
     this.idProduct = idProduct;
     this.quantity = quantity;
-    this.subTotal = subTotal;
+    this.subtotal = subTotal;
     this.idBranch = idBranch;
   }
 }

@@ -82,7 +82,7 @@ export class SaleComponent implements OnInit {
   calculateTotal() {
     this.total = 0;
     this.list_products.forEach((item) => {
-      this.total += item.subTotal;
+      this.total += item.subtotal;
     });
   }
 
@@ -90,7 +90,7 @@ export class SaleComponent implements OnInit {
     this.list_products.forEach((item) => {
       if (item.idProduct.idProduct == add.idProduct) {
         item.quantity = value.target.value;
-        item.subTotal = item.quantity * item.idProduct.price;
+        item.subtotal = item.quantity * item.idProduct.price;
       }
     });
     this.calculateTotal();

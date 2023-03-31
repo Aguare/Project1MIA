@@ -20,7 +20,7 @@ public class Sale implements Serializable {
     private Long idBranch;
 
     @Column(name = "fk_dpi")
-    private String dpi;
+    private Long dpi;
 
     @Column(name = "fk_nit")
     private String nit;

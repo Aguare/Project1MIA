@@ -84,7 +84,7 @@ export class ConfirmSaleComponent {
   calculateTotal() {
     this.total = 0;
     this.list_products.forEach((element) => {
-      element.subTotal = element.idProduct.price * element.quantity;
+      element.subtotal = element.idProduct.price * element.quantity;
       this.total += element.idProduct.price * element.quantity;
     });
   }
@@ -111,7 +111,7 @@ export class ConfirmSaleComponent {
           currentDate,
           this.total,
           this.user.fk_dpi.branch.idBranch,
-          "" + this.user.fk_dpi.dpi,
+          this.user.fk_dpi.dpi,
           this.search
         )
       );
