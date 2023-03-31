@@ -9,6 +9,9 @@ import { Product } from "../Entitys/Product";
 import { Inventory } from "../Entitys/Inventory";
 import { Employee } from "../Entitys/Employee";
 import { MoveProduct } from "../Entitys/MoveProduct";
+import { Sale } from "../Entitys/Sale";
+import { SaleGroup } from "../Entitys/SaleGroup";
+import { ListProducts } from "../Entitys/ListProducts";
 
 @Injectable({
   providedIn: "root",
@@ -44,6 +47,12 @@ export class ConsultsService {
 
   getClientNit(nit: String): Observable<Client> {
     return this.connection.get<Client>(Back.Base + "GetClientNit?nit=" + nit);
+  }
+
+  searchClientNit(nit: String): Observable<Client[]> {
+    return this.connection.get<Client[]>(
+      Back.Base + "SearchClientNit?nit=" + nit
+    );
   }
 
   updateClient(client: Client): Observable<Alert> {
@@ -134,5 +143,17 @@ export class ConsultsService {
 
   updateInventory(inventory: Inventory): Observable<Alert> {
     return this.connection.put<Alert>(Back.Base + "UpdateInventory", inventory);
+  }
+
+  getLastSaleByNit(nit: String): Observable<Sale> {
+    return this.connection.get<Sale>(Back.Base + "GetLastSaleByNit?nit=" + nit);
+  }
+
+  addSale(in2: SaleGroup): Observable<Alert> {
+    return this.connection.post<Alert>(Back.Base + "AddSale", in2);
+  }
+
+  getReport1(): Observable<ListProducts[]> {
+    return this.connection.get<ListProducts[]>(Back.Base + "Report1");
   }
 }

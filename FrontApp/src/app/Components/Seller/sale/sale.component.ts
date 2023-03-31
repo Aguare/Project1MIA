@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Alert } from "src/app/Entitys/Alert";
 import { Inventory } from "src/app/Entitys/Inventory";
 import { ListProducts } from "src/app/Entitys/ListProducts";
 import { Product } from "src/app/Entitys/Product";
@@ -18,11 +19,22 @@ export class SaleComponent implements OnInit {
   listInventory: Inventory[] = [];
   total: number = 0;
   list_products: ListProducts[] = [];
+  list_inventory: Inventory[] = [];
+  confirmSale: boolean = false;
+  alertMessage: Alert = new Alert("", "", "", false);
 
   constructor(
     private consult: ConsultsService,
     private storage: StorageService
-  ) {}
+  ) {
+    let list = this.storage.getListProducts();
+    let listInventory = this.storage.getListInventory();
+    if (list != null && listInventory != null) {
+      this.list_products = list;
+      this.listInventory = listInventory;
+      this.calculateTotal();
+    }
+  }
 
   ngOnInit(): void {
     this.consult.getEmployeeUserName(this.user.username).subscribe((data) => {
@@ -30,42 +42,88 @@ export class SaleComponent implements OnInit {
     });
   }
 
+  saveLists() {
+    this.storage.saveListProducts(this.list_products);
+    this.storage.saveListInventory(this.listInventory);
+    this.calculateTotal();
+  }
+
   addItem(add: Inventory) {
-    this.list_products.push(
-      new ListProducts(0, 0, add.product, 1, add.product.price)
-    );
+    if (!this.existsItem(add)) {
+      this.listInventory.push(add);
+      this.list_products.push(
+        new ListProducts(
+          0,
+          0,
+          add.product,
+          1,
+          add.product.price,
+          this.user.fk_dpi.branch.idBranch
+        )
+      );
+    }
+    this.saveLists();
+  }
+
+  removeItem(add: ListProducts) {
+    this.list_products.forEach((item, index) => {
+      if (item.idProduct.idProduct == add.idProduct.idProduct) {
+        this.list_products.splice(index, 1);
+      }
+    });
+    this.listInventory.forEach((item, index) => {
+      if (item.product.idProduct == add.idProduct.idProduct) {
+        this.listInventory.splice(index, 1);
+      }
+    });
+    this.saveLists();
+  }
+
+  calculateTotal() {
+    this.total = 0;
+    this.list_products.forEach((item) => {
+      this.total += item.subTotal;
+    });
   }
 
   addValue(add: Product, value: any) {
-    let val = value.target.value;
-    this.listInventory.forEach((item) => {
-      if (item.product.idProduct == add.idProduct) {
-        item.quantity = val;
-        this.total = 0;
+    this.list_products.forEach((item) => {
+      if (item.idProduct.idProduct == add.idProduct) {
+        item.quantity = value.target.value;
+        item.subTotal = item.quantity * item.idProduct.price;
       }
     });
-    this.listInventory.forEach((item) => {
-      this.total += item.product.price * item.quantity;
-    });
+    this.calculateTotal();
+    this.storage.saveListProducts(this.list_products);
   }
 
   existsItem(add: Inventory): boolean {
     let exists = false;
-    this.listInventory.forEach((item) => {
-      if (item.product.idProduct == add.product.idProduct) {
+    this.list_products.forEach((item) => {
+      if (item.idProduct.idProduct == add.product.idProduct) {
         exists = true;
       }
     });
     return exists;
   }
 
-  getMax(idProduct: Product): number {
+  getValueAmount(idProduct: number): number {
+    let value = 0;
+    this.list_products.forEach((item) => {
+      if (item.idProduct.idProduct == idProduct) {
+        value = item.quantity;
+      }
+    });
+    return value;
+  }
+
+  getMax(idProduct: number): number {
     let max = 0;
-    if (this.inventory == null) {
+    if (this.listInventory == null) {
       return 0;
     }
-    this.inventory.forEach((item) => {
-      if (item.product.idProduct == idProduct.idProduct) {
+    this.listInventory.forEach((item) => {
+      if (item.product.idProduct == idProduct) {
         max = item.quantity;
       }
     });
@@ -84,4 +142,19 @@ export class SaleComponent implements OnInit {
         });
     }
   }
+
+  makeSale() {
+    this.confirmSale = true;
+  }
+
+  cancelSale() {
+    this.list_products = [];
+    this.listInventory = [];
+    this.confirmSale = false;
+    this.storage.saveListProducts(this.list_products);
+    this.storage.saveListInventory(this.listInventory);
+    this.calculateTotal();
+  }
+
+  messageEmit(alert: Alert) {}
 }

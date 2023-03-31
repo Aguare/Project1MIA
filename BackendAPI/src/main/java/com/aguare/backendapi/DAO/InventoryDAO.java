@@ -16,4 +16,5 @@ public interface InventoryDAO extends CrudRepository<Inventory, Long> {
     Iterable<Inventory> search(@Param("idB") Long idBranch, @Param("prod") String product);
 
     Inventory findByIdInventory_IdBranchAndIdInventory_IdProduct(Long idBranch, Long idProduct);
+
 }

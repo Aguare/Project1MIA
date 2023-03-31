@@ -3,22 +3,22 @@ export class Sale {
   date: Date;
   total: number;
   idBranch: number;
-  DPI: number;
-  NIT: string;
+  dpi: string;
+  nit: string;
 
   constructor(
     idSale: number,
     date: Date,
     total: number,
     idBranch: number,
-    DPI: number,
+    DPI: string,
     NIT: string
   ) {
     this.idSale = idSale;
     this.date = date;
     this.total = total;
     this.idBranch = idBranch;
-    this.DPI = DPI;
-    this.NIT = NIT;
+    this.dpi = DPI;
+    this.nit = NIT;
   }
 }

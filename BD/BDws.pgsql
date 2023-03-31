@@ -57,6 +57,7 @@ CREATE TABLE List_Products(
     id_list_products SERIAL PRIMARY KEY,
     FK_id_sale INTEGER REFERENCES Sale(id_sale),
     FK_id_product INTEGER REFERENCES Product(id_product),
+    FK_id_branch INTEGER REFERENCES Branch(id_branch),
     quantity INTEGER NOT NULL,
     subtotal DECIMAL(10,2) NOT NULL
 );

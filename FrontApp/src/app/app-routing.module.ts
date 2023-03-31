@@ -15,6 +15,7 @@ import { SaleComponent } from "./Components/Seller/sale/sale.component";
 import { ListReportsComponent } from "./Components/Admin/list-reports/list-reports.component";
 import { MoveProductComponent } from "./Components/Inventory/move-product/move-product.component";
 import { IncrementProductComponent } from "./Components/Inventory/increment-product/increment-product.component";
+import { Report1Component } from "./Components/Admin/report1/report1.component";
 
 const routes: Routes = [
   {
@@ -69,6 +70,7 @@ const routes: Routes = [
       { path: "List-Employees", component: ListEmployeesComponent },
       { path: "Register-Employee/:dpi", component: EmployeeFormComponent },
       { path: "List-Reports", component: ListReportsComponent },
+      { path: "Report-1", component: Report1Component },
     ],
   },
 ];

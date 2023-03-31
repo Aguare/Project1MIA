@@ -24,7 +24,7 @@ export class LogoutComponent {
   }
 
   close() {
-    this.storage.remove("User");
+    this.storage.clear();
     this.redirect.redirectPage("/Login");
   }
 }
