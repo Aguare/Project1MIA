@@ -1,0 +1,134 @@
+<div *ngIf="!confirmSale" class="container my-5" style="max-width: 80%">
+  <div class="text-center">
+    <h2>Venta</h2>
+  </div>
+  <div class="input-group mb-1">
+    <input
+      type="text"
+      class="form-control"
+      [(ngModel)]="search"
+      (ngModelChange)="searchProduct()"
+      placeholder="Ingrese un nombre del Producto"
+    />
+  </div>
+  <div>
+    <div class="overflow-auto" style="max-height: 200px">
+      <table class="table text-center" *ngIf="inventory != null">
+        <thead class="table-dark" style="position: sticky; top: 0">
+          <tr>
+            <td>ID</td>
+            <td>Nombre</td>
+            <td>Precio</td>
+            <td>Disponibilidad</td>
+            <td></td>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngIf="inventory == null && search == ''">
+            <td colspan="4">No hay productos</td>
+          </tr>
+          <tr *ngFor="let inv of inventory">
+            <td>{{ inv.product.idProduct }}</td>
+            <td>{{ inv.product.name_p }}</td>
+            <td>
+              {{ inv.product.price | currency : "Q" : "symbol" : "1.2-2" }}
+            </td>
+            <td>{{ inv.quantity }}</td>
+            <td>
+              <button
+                class="btn btn-outline-info btn-sm"
+                (click)="addItem(inv)"
+              >
+                Agregar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <br />
+  <div class="text-center my-4">
+    <h2>Productos Agregados a la compra</h2>
+  </div>
+  <ul *ngIf="inventory == null && search != ''" class="list-group">
+    <li class="list-group-item active">No hay productos</li>
+  </ul>
+  <table class="table text-center">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Cantidad</th>
+        <th>Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let inv of list_products">
+        <td class="col">{{ inv?.idProduct?.idProduct }}</td>
+        <td class="col">{{ inv?.idProduct?.name_p }}</td>
+        <td class="col">{{ inv?.idProduct?.price }}</td>
+        <td>
+          <div class="col">
+            <div class="input-group-sm">
+              <input
+                type="number"
+                min="1"
+                value="getValueAmount(inv.idProduct.idProduct)"
+                [value]="getValueAmount(inv.idProduct.idProduct)"
+                [max]="getMax(inv.idProduct.idProduct)"
+                (change)="addValue(inv.idProduct, $event)"
+              />
+            </div>
+          </div>
+        </td>
+        <td>
+          <button
+            class="btn btn-outline-danger btn-sm"
+            (click)="removeItem(inv)"
+          >
+            Quitar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot class="table-primary">
+      <tr class="text-center">
+        <th colspan="3">TOTAL</th>
+        <th colspan="2">{{ total | currency : "Q" : "symbol" : "1.2-2" }}</th>
+      </tr>
+    </tfoot>
+  </table>
+  <div class="row text-center">
+    <div class="col">
+      <button
+        class="btn btn-danger btn-lg"
+        (click)="cancelSale()"
+        [disabled]="list_products.length == 0"
+      >
+        Cancelar Venta
+      </button>
+    </div>
+    <div class="col">
+      <button
+        class="btn btn-success btn-lg"
+        (click)="makeSale()"
+        [disabled]="list_products.length == 0"
+      >
+        Realizar Venta
+      </button>
+    </div>
+  </div>
+</div>
+<div *ngIf="confirmSale" class="container">
+  <app-confirm-sale
+    (cancel)="cancelSale()"
+    (message)="alertMessage = $event"
+    [list_products]="this.list_products"
+  ></app-confirm-sale>
+</div>
+<div class="text-center">
+  <app-alert [alert]="alertMessage"></app-alert>
+</div>

@@ -2,14 +2,6 @@ CREATE DATABASE Electronic_Homes;
 
 \c electronic_homes;
 
-
-CREATE TABLE User_Acces(
-    username VARCHAR(50) PRIMARY KEY,
-    password VARCHAR(250) NOT NULL,
-    email VARCHAR(50) NOT NULL,
-    role VARCHAR(50) NOT NULL
-);
-
 CREATE TABLE Branch(
     id_branch SERIAL PRIMARY KEY,
     name_b VARCHAR(50) NOT NULL,
@@ -18,11 +10,18 @@ CREATE TABLE Branch(
 );
 
 CREATE TABLE Employee(
-    DPI VARCHAR(13) PRIMARY KEY,
+    DPI BIGINT PRIMARY KEY,
     names_e VARCHAR(50) NOT NULL,
     last_names VARCHAR(50) NOT NULL,
     date_of_birth DATE NOT NULL,
     FK_id_branch INTEGER REFERENCES Branch(id_branch)
+);
+
+CREATE TABLE User_Acces(
+    username VARCHAR(50) PRIMARY KEY,
+    password VARCHAR(250) NOT NULL,
+    role VARCHAR(50) NOT NULL,
+    FK_DPI BIGINT REFERENCES Employee(DPI)
 );
 
 CREATE TABLE Client(
@@ -49,8 +48,8 @@ CREATE TABLE Sale(
     id_sale SERIAL PRIMARY KEY,
     date DATE NOT NULL,
     total DECIMAL(10,2) NOT NULL,
-    FL_id_branch INTEGER REFERENCES Branch(id_branch),
-    FK_DPI VARCHAR(13) REFERENCES Employee(DPI),
+    FK_id_branch INTEGER REFERENCES Branch(id_branch),
+    FK_DPI BIGINT REFERENCES Employee(DPI),
     FK_NIT VARCHAR(20) REFERENCES Client(NIT)
 );
 
@@ -58,6 +57,7 @@ CREATE TABLE List_Products(
     id_list_products SERIAL PRIMARY KEY,
     FK_id_sale INTEGER REFERENCES Sale(id_sale),
     FK_id_product INTEGER REFERENCES Product(id_product),
+    FK_id_branch INTEGER REFERENCES Branch(id_branch),
     quantity INTEGER NOT NULL,
     subtotal DECIMAL(10,2) NOT NULL
 );

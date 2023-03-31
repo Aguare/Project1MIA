@@ -1,10 +1,3 @@
-INSERT INTO User_Acces (username, password, email, role)
-VALUES
-    ('vendedor01', '123456', 'vendedor01@empresa.com', 'Vendedor'),
-    ('inventario01', '123456', 'inventario01@empresa.com', 'Inventario'),
-    ('bodega01', '123456', 'bodega01@empresa.com', 'Bodega'),
-    ('admin01', '123456', 'admin01@empresa.com', 'Admin');
-
 INSERT INTO Branch (id_branch, name_b, address, phone) VALUES
 (1, 'Central', 'Calle Principal #1', '+1 123-456-7890'),
 (2, 'Norte', 'Avenida Norte #2', '+1 234-567-8901'),
@@ -12,11 +5,19 @@ INSERT INTO Branch (id_branch, name_b, address, phone) VALUES
 (4, 'Bodega', 'Calle Secundaria #4', '+1 456-789-0123');
 
 INSERT INTO Employee (DPI, names_e, last_names, date_of_birth, FK_id_branch) VALUES
-('1111111111111', 'Empleado1', 'Apellido1', '1990-01-01', 1),
-('2222222222222', 'Empleado2', 'Apellido2', '1991-02-02', 2),
-('3333333333333', 'Empleado3', 'Apellido3', '1992-03-03', 1),
-('4444444444444', 'Empleado4', 'Apellido4', '1993-04-04', 3),
-('5555555555555', 'Empleado5', 'Apellido5', '1994-05-05', 2);
+(1111111111111, 'Vendedor', 'Apellido1', '1990-01-01', 1),
+(2222222222222, 'Inventario', 'Apellido2', '1991-02-02', 2),
+(3333333333333, 'Bodega', 'Apellido3', '1992-03-03', 4),
+(4444444444444, 'Administrador', 'Apellido4', '1993-04-04', 3),
+(5555555555555, 'Empleado5', 'Apellido5', '1994-05-05', 2);
+
+INSERT INTO User_Acces (username, password, role, FK_DPI)
+VALUES
+    ('1111111111111', '123456', 'Vendedor', '1111111111111'),
+    ('2222222222222', '123456', 'Inventario', '2222222222222'),
+    ('3333333333333', '123456', 'Bodega', '3333333333333'),
+    ('4444444444444', '123456', 'Admin', '4444444444444'),
+    ('5555555555555', '123456', 'Vendedor', '5555555555555');
 
 INSERT INTO Client (NIT, names_c, address) VALUES
 ('256198473', 'Cliente1', 'Calle Principal #1'),
@@ -60,3 +61,43 @@ INSERT INTO Product (name_p, price, description) VALUES
 ('Plancha de vapor Rowenta', 99.99, 'Plancha de vapor Rowenta modelo DW5080.'),
 ('Ventilador de torre Lasko', 149.99, 'Ventilador de torre Lasko modelo T42951.'),
 ('Parrilla eléctrica Hamilton Beach', 249.99, 'Parrilla eléctrica Hamilton Beach modelo 25361.');
+
+--Insertar productos en inventario
+INSERT INTO Inventory (FK_id_Product, FK_id_Branch, quantity) VALUES
+(1,1,20),
+(2,1,25),
+(3,1,26),
+(4,1,17),
+(5,1,5),
+(6,1,2),
+(7,1,40);
+
+INSERT INTO Inventory (FK_id_Product, FK_id_Branch, quantity) VALUES
+(8,2,3),
+(9,2,4),
+(10,2,7),
+(11,2,12),
+(12,2,26),
+(13,2,20),
+(14,2,4);
+
+INSERT INTO Inventory (FK_id_Product, FK_id_Branch, quantity) VALUES
+(1,2,20),
+(2,2,25),
+(3,2,26),
+(4,2,17),
+(5,2,5),
+(6,2,2),
+(7,2,40);
+
+INSERT INTO Inventory (FK_id_Product, FK_id_Branch, quantity) VALUES
+(1,4,1),
+(2,4,2),
+(3,4,3),
+(4,4,4),
+(5,4,5),
+(6,4,6),
+(7,4,7);
+---Consultas---
+SELECT p.id_product, p.name_p, p.price, i.quantity FROM Product p INNER JOIN Inventory i ON p.id_product = i.FK_id_Product WHERE i.FK_id_Branch = 2;
+

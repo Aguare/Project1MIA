@@ -1,0 +1,21 @@
+<div class="container my-5">
+  <div class="text-center">
+    <h2>Top 10 productos más vendidos</h2>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Cantidad</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of this.list_report1">
+        <th>{{ p.idProduct.idProduct }}</th>
+        <td>{{ p.idProduct.name_p }}</td>
+        <td>{{ p.quantity }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

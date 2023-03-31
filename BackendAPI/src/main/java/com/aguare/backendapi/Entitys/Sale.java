@@ -15,7 +15,13 @@ public class Sale implements Serializable {
     private Long idSale;
     private Date date;
     private Double total;
+
+    @Column(name = "fk_id_branch")
     private Long idBranch;
-    private String DPI;
-    private String NIT;
+
+    @Column(name = "fk_dpi")
+    private String dpi;
+
+    @Column(name = "fk_nit")
+    private String nit;
 }

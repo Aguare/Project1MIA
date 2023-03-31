@@ -1,0 +1,51 @@
+<div class="container p-5" style="max-width: 95%">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="text-center">Listado de Empleados</h1>
+    </div>
+    <table class="table">
+      <thead class="table-dark">
+        <tr class="text-center">
+          <th scope="col">DPI</th>
+          <th scope="col">Nombres</th>
+          <th scope="col">Apellidos</th>
+          <th scope="col">Fecha Nacimiento</th>
+          <th scope="col">Sucursal</th>
+          <th scope="col">Opciones</th>
+        </tr>
+      </thead>
+      <tbody class="text-center">
+        <tr *ngIf="employees?.length == 0">
+          <td colspan="5">No hay employeos registrados</td>
+        </tr>
+        <tr *ngFor="let employe of employees">
+          <td>{{ employe.dpi }}</td>
+          <td>{{ employe.names }}</td>
+          <td>
+            {{ employe.lastNames }}
+          </td>
+          <td>{{ employe.dateBirthday }}</td>
+          <td>{{ employe.branch.nameB }}</td>
+          <td>
+            <a
+              class="btn btn-outline-info"
+              href="/Admin/Register-Employee/{{ employe.dpi }}"
+            >
+              Editar
+            </a>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot class="table-dark">
+        <tr class="text-center">
+          <th scope="col">DPI</th>
+          <th scope="col">Nombres</th>
+          <th scope="col">Apellidos</th>
+          <th scope="col">Fecha Nacimiento</th>
+          <th scope="col">Sucursal</th>
+          <th scope="col">Opciones</th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

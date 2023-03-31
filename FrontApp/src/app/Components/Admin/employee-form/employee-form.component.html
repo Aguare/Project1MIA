@@ -1,0 +1,96 @@
+<div class="container-sm p-5" style="max-width: 700px">
+  <app-alert [alert]="info"></app-alert>
+  <form [formGroup]="employeForm" (ngSubmit)="validate()" class="was-validated">
+    <div class="mb-3 mt-3">
+      <label for="uname" class="form-label">DPI</label>
+      <input
+        type="text"
+        class="form-control"
+        minlength="13"
+        maxlength="13"
+        formControlName="dpi"
+        placeholder="Ingrese el DPI"
+        required
+      />
+    </div>
+    <div class="mb-3 mt-3">
+      <label for="uname" class="form-label">Nombres</label>
+      <input
+        type="text"
+        class="form-control"
+        minlength="3"
+        maxlength="50"
+        formControlName="names_e"
+        placeholder="Ingrese los nombres"
+        required
+      />
+    </div>
+    <div class="mb-3 mt-3">
+      <label for="uname" class="form-label">Apellidos</label>
+      <input
+        type="text"
+        class="form-control"
+        minlength="3"
+        maxlength="50"
+        formControlName="last_names"
+        placeholder="Ingrese los apellidos"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="pwd" class="form-label">Fecha de Nacimiento</label>
+      <input
+        type="date"
+        class="form-control"
+        formControlName="dateBirthday"
+        required
+      />
+    </div>
+    <div
+      class="input-group mb-3"
+      *ngIf="this.user.role != 'Bodega' && this.user.role"
+    >
+      <label class="input-group-text" for="inputGroupSelect01">Sucursal</label>
+      <select
+        formControlName="idBranch"
+        class="form-select"
+        (change)="changeBranch($event)"
+      >
+        <option value="1">Central</option>
+        <option value="2">Norte</option>
+        <option value="3">Sur</option>
+      </select>
+    </div>
+    <div class="input-group mb-3">
+      <label class="input-group-text" for="inputGroupSelect01"
+        >Puesto de Trabajo</label
+      >
+      <select
+        formControlName="role"
+        class="form-select"
+        (change)="changeRole($event)"
+      >
+        <option value="Bodega">Bodega</option>
+        <option value="Vendedor">Vendedor</option>
+        <option value="Inventario">Inventario</option>
+        <option value="Admin">Administrador</option>
+      </select>
+    </div>
+    <div class="mb-3 mt-3">
+      <label for="uname" class="form-label">Contraseña</label>
+      <input
+        type="password"
+        class="form-control"
+        minlength="5"
+        maxlength="250"
+        formControlName="password"
+        placeholder="Ingrese una contraseña para acceder al sistema"
+        required
+      />
+    </div>
+    <div class="d-grid my-3">
+      <button type="submit" class="btn btn-primary">Ingresar</button>
+    </div>
+  </form>
+  <app-alert [alert]="alert"></app-alert>
+</div>

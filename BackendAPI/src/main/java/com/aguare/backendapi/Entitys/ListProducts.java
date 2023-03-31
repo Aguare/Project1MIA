@@ -12,8 +12,17 @@ public class ListProducts implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idListProducts;
+
+    @Column(name = "fk_id_sale")
     private Long idSale;
-    private Long idProduct;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "fk_id_product")
+    private Product idProduct;
+
+    @Column(name = "fk_id_branch")
+    private Long idBranch;
+
     private int quantity;
     private Double subtotal;
 }

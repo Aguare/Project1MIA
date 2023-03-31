@@ -39,6 +39,10 @@ public class ClientCTRL {
         return client.findById(nit).get();
     }
 
+    @GetMapping("/SearchClientNit")
+    public Iterable<Client> searchClient(String nit){
+        return client.findByNitLike(nit);
+    }
     @PutMapping("/UpdateClient")
     public Alert updateClient(@RequestBody Client in){
         Optional<Client> receipt = this.client.findById(in.getNit());
