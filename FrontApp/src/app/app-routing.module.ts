@@ -16,6 +16,9 @@ import { ListReportsComponent } from "./Components/Admin/list-reports/list-repor
 import { MoveProductComponent } from "./Components/Inventory/move-product/move-product.component";
 import { IncrementProductComponent } from "./Components/Inventory/increment-product/increment-product.component";
 import { Report1Component } from "./Components/Admin/report1/report1.component";
+import { Report2Component } from "./Components/Admin/report2/report2.component";
+import { ReportBranchComponent } from "./Components/Admin/report-branch/report-branch.component";
+import { ReportEmployeeComponent } from "./Components/Admin/report-employee/report-employee.component";
 
 const routes: Routes = [
   {
@@ -70,7 +73,10 @@ const routes: Routes = [
       { path: "List-Employees", component: ListEmployeesComponent },
       { path: "Register-Employee/:dpi", component: EmployeeFormComponent },
       { path: "List-Reports", component: ListReportsComponent },
-      { path: "Report-1", component: Report1Component },
+      { path: "Report/:num", component: Report1Component },
+      { path: "Report2", component: Report2Component },
+      { path: "ReportBranch/:num", component: ReportBranchComponent },
+      { path: "ReportEmployee/:num", component: ReportEmployeeComponent },
     ],
   },
 ];

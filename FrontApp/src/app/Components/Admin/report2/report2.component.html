@@ -1,0 +1,23 @@
+<div class="container my-5">
+  <div class="text-center">
+    <h2>Top 10 Clientes con más ganancias que generan</h2>
+  </div>
+  <div class="my-3">
+    <table class="table text-center">
+      <thead>
+        <tr>
+          <th scope="col">NIT</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Generó</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of this.client_list">
+          <th>{{ p.nit }}</th>
+          <td>{{ p.names_c }}</td>
+          <td>{{ getAmount(p.nit) | currency : "Q" : "symbol" : "1.2-2" }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

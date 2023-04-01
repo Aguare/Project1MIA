@@ -1,8 +1,6 @@
 package com.aguare.backendapi.Entitys;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -13,6 +11,7 @@ import java.io.Serializable;
 public class Client implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String nit;
 
     private String names_c;

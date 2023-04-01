@@ -27,6 +27,9 @@ import { MoveProductComponent } from './Components/Inventory/move-product/move-p
 import { IncrementProductComponent } from './Components/Inventory/increment-product/increment-product.component';
 import { ConfirmSaleComponent } from './Components/Seller/confirm-sale/confirm-sale.component';
 import { Report1Component } from './Components/Admin/report1/report1.component';
+import { Report2Component } from './Components/Admin/report2/report2.component';
+import { ReportBranchComponent } from './Components/Admin/report-branch/report-branch.component';
+import { ReportEmployeeComponent } from './Components/Admin/report-employee/report-employee.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +54,9 @@ import { Report1Component } from './Components/Admin/report1/report1.component';
     IncrementProductComponent,
     ConfirmSaleComponent,
     Report1Component,
+    Report2Component,
+    ReportBranchComponent,
+    ReportEmployeeComponent,
   ],
   imports: [
     BrowserModule,

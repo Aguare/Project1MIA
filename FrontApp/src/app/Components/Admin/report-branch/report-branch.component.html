@@ -1,0 +1,30 @@
+<div class="container my-5">
+  <div class="text-center">
+    <h2>{{ title }}</h2>
+  </div>
+  <div class="my-3">
+    <table class="table text-center">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Dirección</th>
+          <th scope="col">Ventas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of this.branch_list">
+          <th>{{ p.idBranch }}</th>
+          <td>{{ p.nameB }}</td>
+          <td>{{ p.address }}</td>
+          <td *ngIf="option == 3">
+            {{ getSales(p.idBranch) }}
+          </td>
+          <td *ngIf="option == 4">
+            {{ getSales(p.idBranch) | currency : "Q" : "symbol" : "1.2-2" }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -12,6 +12,7 @@ import { MoveProduct } from "../Entitys/MoveProduct";
 import { Sale } from "../Entitys/Sale";
 import { SaleGroup } from "../Entitys/SaleGroup";
 import { ListProducts } from "../Entitys/ListProducts";
+import { Branch } from "../Entitys/Branch";
 
 @Injectable({
   providedIn: "root",
@@ -153,7 +154,41 @@ export class ConsultsService {
     return this.connection.post<Alert>(Back.Base + "AddSale", in2);
   }
 
-  getReport1(): Observable<ListProducts[]> {
-    return this.connection.get<ListProducts[]>(Back.Base + "Report1");
+  getBranchId(idBranch: number): Observable<Branch> {
+    return this.connection.get<Branch>(
+      Back.Base + "GetBranchId?id=" + idBranch
+    );
+  }
+
+  getReport1(): Observable<any[]> {
+    return this.connection.get<any[]>(Back.Base + "Report1");
+  }
+
+  getReport2(): Observable<any[]> {
+    return this.connection.get<any[]>(Back.Base + "Report2");
+  }
+
+  getReport3(): Observable<any[]> {
+    return this.connection.get<any[]>(Back.Base + "Report3");
+  }
+
+  getReport4(): Observable<any[]> {
+    return this.connection.get<any[]>(Back.Base + "Report4");
+  }
+
+  getReport5(): Observable<any[]> {
+    return this.connection.get<any[]>(Back.Base + "Report5");
+  }
+
+  getReport6(): Observable<any[]> {
+    return this.connection.get<any[]>(Back.Base + "Report6");
+  }
+
+  getReport9(id: number): Observable<any[]> {
+    return this.connection.get<any[]>(Back.Base + "Report9?id=" + id);
+  }
+
+  getReport10(id: number): Observable<any[]> {
+    return this.connection.get<any[]>(Back.Base + "Report10?id=" + id);
   }
 }
