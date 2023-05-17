@@ -13,6 +13,7 @@ import { Sale } from "../Entitys/Sale";
 import { SaleGroup } from "../Entitys/SaleGroup";
 import { ListProducts } from "../Entitys/ListProducts";
 import { Branch } from "../Entitys/Branch";
+import { User1 } from "../Entitys/User1";
 
 @Injectable({
   providedIn: "root",
@@ -21,7 +22,11 @@ export class ConsultsService {
   constructor(private connection: HttpClient) {}
 
   validateUser(user: User): Observable<User> {
-    return this.connection.post<User>(Back.Base + "Login", user);
+    return this.connection.post<User>(Back.Base + "RegisterUser", user);
+  }
+
+  registerUser(user: User1): Observable<User1> {
+    return this.connection.post<User1>(Back.Base + "Users/RegisterUser", user);
   }
 
   getUser(userName: String): Observable<User> {

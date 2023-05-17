@@ -14,6 +14,7 @@ import { RedirectService } from "src/app/Services/redirect.service";
 import { AlertComponent } from "../alert/alert.component";
 import { Employee } from "src/app/Entitys/Employee";
 import { Branch } from "src/app/Entitys/Branch";
+import { User1 } from "src/app/Entitys/User1";
 
 @Component({
   selector: "app-login",
@@ -39,6 +40,13 @@ export class LoginComponent {
     this.loginForm = this.fb.group({
       username: ["", [Validators.required, Validators.minLength(3)]],
       password: ["", [Validators.required, Validators.minLength(3)]],
+    });
+  }
+
+  validate2() {
+    let user = new User1("2", "name", "password", "STUDENT", 0);
+    this.verify.registerUser(user).subscribe((correct: User1) => {
+      console.log(correct);
     });
   }
 
